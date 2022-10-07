@@ -27,16 +27,6 @@ void* calculate (void *arg){
 	global_pi += 4.0 * circle_count/npoints;
 	
 	pthread_mutex_unlock(&lock);
-}
-
-
-void *PrintHello(void *threadid){
-	long tid;
-	tid = (long)threadid;
-	printf("Hello World! It's me, thread #%ld!\n", tid);
-	global_variable++;
-	printf("Global variable %d\n",global_variable);
-	
 	pthread_exit(NULL);
 }
 
