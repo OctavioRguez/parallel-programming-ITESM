@@ -6,6 +6,10 @@
 
 int global_variable = 10;
 
+void* calculate (){
+		
+}
+
 
 void *PrintHello(void *threadid)
 {
