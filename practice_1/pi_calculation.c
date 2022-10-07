@@ -1,52 +1,42 @@
 
-#include<stdio.h>
-#include<string.h>
-#include<pthread.h>
-#include<stdlib.h>
-#include<unistd.h> 
+#include <pthread.h>
+#include <stdio.h>
+#include <stdlib.h>
+#define NUM_THREADS    5
 
-pthread_t tid[2];
-int counter;
-pthread_mutex_t lock;
+int global_variable = 10;
 
-void* doSomeThing(void *arg)
+
+void *PrintHello(void *threadid)
 {
-	pthread_mutex_lock(&lock);
-    unsigned long i = 0;
-    printf("\n Job started, counter = %d\n", counter);
+    long tid;
+    tid = (long)threadid;
+    printf("Hello World! It's me, thread #%ld!\n", tid);
+	global_variable++;
+	printf("Global variable %d\n",global_variable);
 
-    for(i=0; i<1000;i++){
-    	counter += 1;
-    }
-
-    printf("\n Job finished, counter = %d\n", counter);
-	pthread_mutex_unlock(&lock);
-
-    return NULL;
+    pthread_exit(NULL);
 }
 
-int main(void)
+int main(int argc, char *argv[])
 {
-    int i = 0;
-    int err;
+    pthread_t threads[NUM_THREADS];
 
-    if (pthread_mutex_init(&lock, NULL) != 0){
-        printf("\n mutex init failed\n");
-            return 1;
+
+    int rc;
+    long t;
+
+    for(t=0;t<NUM_THREADS;t++){
+        printf("In main: creating thread %ld\n", t);
+        rc = pthread_create(&threads[t], NULL, PrintHello, (void *)t);
+        if (rc){
+            printf("ERROR; return code from pthread_create() is %d\n", rc);
+            exit(-1);
+        }
     }
 
-    while(i < 2) {
-        err = pthread_create(&(tid[i]), NULL, &doSomeThing, NULL);
-            if (err != 0)
-                printf("\ncan't create thread :[%s]", strerror(err));
-                i++;
-    }
 
-    pthread_join(tid[0], NULL);
-    pthread_join(tid[1], NULL);
-    pthread_mutex_destroy(&lock);
 
-	printf("%d\n",counter);
-
-    return 0;
+    /* Last thing that main() should do */
+    pthread_exit(NULL);
 }
