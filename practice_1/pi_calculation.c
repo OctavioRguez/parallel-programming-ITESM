@@ -56,8 +56,8 @@ int main(int argc, char *argv[]){
             	return 1;
     	}
 
-	pthread_t threads[argc];
-	points_thread = npoints/argc;
+	pthread_t threads[num_threads];
+	points_thread = npoints/num_threads;
 	int rc;
 	long t;
 	for(t = 0;t < argc;t++){
