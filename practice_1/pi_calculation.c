@@ -14,19 +14,18 @@ https://github.com/VictorRodriguez/operating-systems-lecture/blob/master/labs/04
 
 long double pi = 0;
 int npoints = 10000;
+int circle_count;
 int points_thread;
 int num_threads;
 pthread_mutex_t lock;
 
 void* calculate (void *arg){
-	int circle_count = 0;
+	int cont
 	pthread_mutex_lock(&lock);
 	
 	for(j = 1; j < npoints; j++){
-		srand((unsigned int)time(NULL));
-		int n1 = rand() % 2;
-		srand((unsigned int)time(NULL));
-		int n2 = rand() % 2; 
+		double n1 = (double)rand() % 2.0;
+		double n2 = (double)rand() % 2.0;
 		
 		if (sqrt(pow(n1, 2) + pow(n2, 2)) < 1){
 			circle_count++;
@@ -55,6 +54,7 @@ int main(int argc, char *argv[]){
             	return 1;
     	}
 
+	srand((unsigned int)time(NULL));
 	pthread_t threads[num_threads];
 	points_thread = npoints/num_threads;
 	int rc;
