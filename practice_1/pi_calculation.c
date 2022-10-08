@@ -12,7 +12,7 @@ https://github.com/VictorRodriguez/operating-systems-lecture/blob/master/labs/04
 #include <time.h>
 #include <math.h>
 
-long double pi;
+double pi;
 int npoints = 10000;
 int circle_count;
 int points_thread;
@@ -75,7 +75,7 @@ int main(int argc, char *argv[]){
 	time_used = (double)(end - start)/CLOCKS_PER_SEC;
 	
 	printf("Pi = %f",pi);
-	printf("Time with %f threads = %f", num_threads, time_used);
+	printf("Time with %i threads = %f", num_threads, time_used);
 	pthread_mutex_destroy(&lock);
 
 	return 0;
