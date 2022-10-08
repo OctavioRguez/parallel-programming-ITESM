@@ -13,7 +13,7 @@ https://github.com/VictorRodriguez/operating-systems-lecture/blob/master/labs/04
 #include <math.h>
 
 double pi;
-int npoints = 10000;
+int npoints = 100000;
 int circle_count;
 int points_thread;
 int num_threads;
