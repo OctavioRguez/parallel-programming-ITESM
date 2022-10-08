@@ -20,7 +20,6 @@ int num_threads;
 pthread_mutex_t lock;
 
 void* calculate (void *arg){
-	int cont
 	pthread_mutex_lock(&lock);
 	
 	for(j = 1; j < points_thread; j++){
