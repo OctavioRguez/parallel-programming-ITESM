@@ -13,10 +13,11 @@ https://github.com/VictorRodriguez/operating-systems-lecture/blob/master/labs/04
 #include <math.h>
 
 long double global_pi = 0;
+int npoints = 10000;
+int points_thread;
 pthread_mutex_t lock;
 
 void* calculate (void *arg){
-	int npoints = 10000;
 	int circle_count = 0;
 	pthread_mutex_lock(&lock);
 	
