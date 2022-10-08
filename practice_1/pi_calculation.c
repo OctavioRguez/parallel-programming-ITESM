@@ -9,7 +9,6 @@ https://github.com/VictorRodriguez/operating-systems-lecture/blob/master/labs/04
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 #include <time.h>
 #include <math.h>
 
