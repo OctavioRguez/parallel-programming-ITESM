@@ -1,3 +1,10 @@
+/*
+Autor:
+Misael Octavio Rodríguez Macías A01639786
+
+Con apoyo de los siguientes repositorios:
+https://github.com/VictorRodriguez/operating-systems-lecture/blob/master/labs/04/practice1.c
+*/
 
 #include <pthread.h>
 #include <stdio.h>
