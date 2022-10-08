@@ -24,8 +24,8 @@ void* calculate (void *arg){
 	pthread_mutex_lock(&lock);
 	
 	for(int j = 1; j < points_thread; j++){
-		double n1 = (double)rand_r(&seed)/2.0;
-		double n2 = (double)rand_r(&seed)/2.0;
+		double n1 = (double)rand_r(&seed)/(double)((unsigned)RAND_MAX + 1);
+		double n2 = (double)rand_r(&seed)/(double)((unsigned)RAND_MAX + 1);
 		
 		if (sqrt(pow(n1, 2) + pow(n2, 2)) <= 1){
 			circle_count++;
