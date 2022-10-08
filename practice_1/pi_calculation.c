@@ -23,8 +23,8 @@ void* calculate (void *arg){
 	pthread_mutex_lock(&lock);
 	
 	for(int j = 1; j < points_thread; j++){
-		double n1 = rand() % 2;
-		double n2 = rand() % 2;
+		double n1 = (double)rand_r(&seed)/(double)((unsigned)RAND_MAX + 1);
+		double n2 = (double)rand_r(&seed)/(double)((unsigned)RAND_MAX + 1);
 		
 		if (sqrt(pow(n1, 2) + pow(n2, 2)) <= 1){
 			circle_count++;
@@ -53,7 +53,7 @@ int main(int argc, char *argv[]){
             	return 1;
     	}
 
-	srand((unsigned int)time(NULL));
+	int seed = time(NULL);
 	pthread_t threads[num_threads];
 	points_thread = npoints/num_threads;
 	int rc;
