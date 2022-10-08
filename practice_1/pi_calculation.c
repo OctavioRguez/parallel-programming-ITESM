@@ -4,6 +4,7 @@ Misael Octavio Rodríguez Macías A01639786
 
 Con apoyo de los siguientes repositorios:
 https://github.com/VictorRodriguez/operating-systems-lecture/blob/master/labs/04/practice1.c
+https://github.com/VictorRodriguez/parallel-programming-lecture/blob/main/labs/04/simple-thread.c
 */
 
 #include <pthread.h>
@@ -46,7 +47,6 @@ int main(int argc, char *argv[]){
 	
 	clock_t start, end;
 	double time_used;
-	
 	start = clock();
 	
 	if (pthread_mutex_init(&lock, NULL) != 0){
@@ -58,7 +58,6 @@ int main(int argc, char *argv[]){
 	pthread_t threads[num_threads];
 	points_thread = npoints/num_threads;
 	int rc;
-	long t;
 	for(int t = 0;t < num_threads;t++){
 		rc = pthread_create(&threads[t], NULL, calculate, NULL);
 		if (rc){
@@ -75,9 +74,6 @@ int main(int argc, char *argv[]){
 	end = clock();
 	time_used = (double)(end - start)/CLOCKS_PER_SEC;
 	
-	printf("-------------------------------------------------\n"
-           "Total points launched: %i\n"
-           "Total inside circle: %i\n", npoints, circle_count);
 	printf("Pi = %f\n",pi);
 	printf("Time with %i threads = %f\n", num_threads, time_used);
 	pthread_mutex_destroy(&lock);
