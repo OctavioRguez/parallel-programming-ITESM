@@ -23,8 +23,8 @@ void* calculate (void *arg){
 	pthread_mutex_lock(&lock);
 	
 	for(int j = 1; j < points_thread; j++){
-		double n1 = (double)rand() % 2.0;
-		double n2 = (double)rand() % 2.0;
+		double n1 = (double)rand() % 2;
+		double n2 = (double)rand() % 2;
 		
 		if (sqrt(pow(n1, 2) + pow(n2, 2)) <= 1){
 			circle_count++;
@@ -44,7 +44,7 @@ int main(int argc, char *argv[]){
 	}
 	
 	clock_t start, end;
-	double time;
+	double time_used;
 	
 	start = clock();
 	
@@ -72,10 +72,10 @@ int main(int argc, char *argv[]){
 	
 	pi = 4.0 * (double)circle_count/(double)npoints;
 	end = clock();
-	time = (double)(end - start)/CLOCKS_PER_SEC;
+	time_used = (double)(end - start)/CLOCKS_PER_SEC;
 	
 	printf("Pi = %f",pi);
-	printf("Time with %f threads = %f", num_threads, time);
+	printf("Time with %f threads = %f", num_threads, time_used);
 	pthread_mutex_destroy(&lock);
 
 	return 0;
