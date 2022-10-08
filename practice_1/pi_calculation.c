@@ -49,6 +49,7 @@ int main(int argc, char *argv[]){
     	}
 
 	pthread_t threads[argc];
+	points_thread = npoints/argc;
 	int rc;
 	long t;
 	for(t = 0;t < argc;t++){
