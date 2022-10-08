@@ -38,16 +38,16 @@ void* calculate (void *arg){
 }
 
 int main(int argc, char *argv[]){
+	clock_t start, end;
+	double time_used;
+	start = clock();
+	
 	if (argc < 2){
 		num_threads = 1;
 	}	
 	else{
 		num_threads = atoi(argv[1]);
 	}
-	
-	clock_t start, end;
-	double time_used;
-	start = clock();
 	
 	if (pthread_mutex_init(&lock, NULL) != 0){
         	printf("\n mutex init failed\n");
