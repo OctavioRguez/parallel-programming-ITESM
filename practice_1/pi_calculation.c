@@ -17,6 +17,7 @@ int npoints = 10000;
 int circle_count;
 int points_thread;
 int num_threads;
+int seed;
 pthread_mutex_t lock;
 
 void* calculate (void *arg){
@@ -53,7 +54,7 @@ int main(int argc, char *argv[]){
             	return 1;
     	}
 
-	int seed = time(NULL);
+	seed = time(NULL);
 	pthread_t threads[num_threads];
 	points_thread = npoints/num_threads;
 	int rc;
