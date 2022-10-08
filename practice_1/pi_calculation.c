@@ -75,8 +75,8 @@ int main(int argc, char *argv[]){
 	time_used = (double)(end - start)/CLOCKS_PER_SEC;
 	
 	printf("-------------------------------------------------\n"
-           "Total points launched: %zd\n"
-           "Total inside circle: %zd\n", npoints, circle_count);
+           "Total points launched: %i\n"
+           "Total inside circle: %i\n", npoints, circle_count);
 	printf("Pi = %f\n",pi);
 	printf("Time with %i threads = %f\n", num_threads, time_used);
 	pthread_mutex_destroy(&lock);
