@@ -75,7 +75,7 @@ int main(int argc, char *argv[]){
 	time_used = (double)(end - start)/CLOCKS_PER_SEC;
 	
 	printf("Pi = %f\n",pi);
-	printf("Time with %i threads = %f", num_threads, time_used);
+	printf("Time with %i threads = %f\n", num_threads, time_used);
 	pthread_mutex_destroy(&lock);
 
 	return 0;
