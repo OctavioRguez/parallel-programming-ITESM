@@ -13,7 +13,7 @@ https://github.com/VictorRodriguez/operating-systems-lecture/blob/master/labs/04
 #include <math.h>
 
 double pi;
-int npoints = 100000;
+int npoints = 10000;
 int circle_count;
 int points_thread;
 int num_threads;
@@ -27,7 +27,7 @@ void* calculate (void *arg){
 		double n1 = (double)rand_r(&seed)/(double)((unsigned)RAND_MAX + 1);
 		double n2 = (double)rand_r(&seed)/(double)((unsigned)RAND_MAX + 1);
 		
-		if (sqrt(pow(n1, 2) + pow(n2, 2)) <= 1){
+		if (sqrt(pow(n1, 2) + pow(n2, 2)) <= 1.0){
 			circle_count++;
 		}
 	}
