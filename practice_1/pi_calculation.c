@@ -18,8 +18,8 @@ pthread_mutex_t lock;
 void* calculate (void *arg){
 	pthread_mutex_lock(&lock);
 	
-	npoints = 10000;
-	circle_count = 0;
+	int npoints = 10000;
+	int circle_count = 0;
 	for(j = 1; j < npoints; j++){
 		srand((unsigned int)time(NULL));
 		int n1 = rand() % 2;
