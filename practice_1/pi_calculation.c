@@ -37,13 +37,17 @@ void* calculate (void *arg){
 }
 
 int main(int argc, char *argv[]){
-	pthread_t threads[argc];
+	clock_t start, end;
+	double time;
+	
+	start = clock();
 	
 	if (pthread_mutex_init(&lock, NULL) != 0){
         	printf("\n mutex init failed\n");
             	return 1;
     	}
 
+	pthread_t threads[argc];
 	int rc;
 	long t;
 	for(t = 0;t < argc;t++){
