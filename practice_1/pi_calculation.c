@@ -22,7 +22,7 @@ pthread_mutex_t lock;
 void* calculate (void *arg){
 	pthread_mutex_lock(&lock);
 	
-	for(j = 1; j < points_thread; j++){
+	for(int j = 1; j < points_thread; j++){
 		double n1 = (double)rand() % 2.0;
 		double n2 = (double)rand() % 2.0;
 		
@@ -58,7 +58,7 @@ int main(int argc, char *argv[]){
 	points_thread = npoints/num_threads;
 	int rc;
 	long t;
-	for(t = 0;t < num_threads;t++){
+	for(int t = 0;t < num_threads;t++){
 		rc = pthread_create(&threads[t], NULL, calculate, NULL);
 		if (rc){
 		    printf("ERROR; return code from pthread_create() is %d\n", rc);
