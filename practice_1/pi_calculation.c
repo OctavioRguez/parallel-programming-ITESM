@@ -12,7 +12,6 @@ https://github.com/VictorRodriguez/parallel-programming-lecture/blob/main/labs/0
 #include <stdlib.h>
 #include <time.h>
 #include <math.h>
-#include <unistd.h>
 
 double pi;
 int npoints = 10000;
@@ -35,6 +34,7 @@ void* calculate (void *arg){
 	}
 	
 	pthread_mutex_unlock(&lock);
+	pthread_exit(NULL);
 }
 
 int main(int argc, char *argv[]){
@@ -77,7 +77,6 @@ int main(int argc, char *argv[]){
 	printf("Pi = %f\n",pi);
 	printf("Time with %i threads = %f\n", num_threads, time_used);
 	pthread_mutex_destroy(&lock);
-
-	sleep(5);
+	
 	return 0;
 }
