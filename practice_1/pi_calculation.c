@@ -12,7 +12,7 @@ https://github.com/VictorRodriguez/operating-systems-lecture/blob/master/labs/04
 #include <time.h>
 #include <math.h>
 
-long double pi = 0;
+long double pi;
 int npoints = 10000;
 int circle_count;
 int points_thread;
@@ -23,11 +23,11 @@ void* calculate (void *arg){
 	int cont
 	pthread_mutex_lock(&lock);
 	
-	for(j = 1; j < npoints; j++){
+	for(j = 1; j < points_thread; j++){
 		double n1 = (double)rand() % 2.0;
 		double n2 = (double)rand() % 2.0;
 		
-		if (sqrt(pow(n1, 2) + pow(n2, 2)) < 1){
+		if (sqrt(pow(n1, 2) + pow(n2, 2)) <= 1){
 			circle_count++;
 		}
 	}
@@ -71,9 +71,10 @@ int main(int argc, char *argv[]){
 		pthread_join(threads[i], NULL);
 	}
 	
-	pi += 4.0 * (double)circle_count/(double)npoints;
+	pi = 4.0 * (double)circle_count/(double)npoints;
 	end = clock();
 	time = (double)(end - start)/CLOCKS_PER_SEC;
+	
 	printf("Pi = %f",pi);
 	printf("Time with %f threads = %f", num_threads, time);
 	pthread_mutex_destroy(&lock);
