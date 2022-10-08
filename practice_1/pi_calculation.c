@@ -15,6 +15,7 @@ https://github.com/VictorRodriguez/operating-systems-lecture/blob/master/labs/04
 long double global_pi = 0;
 int npoints = 10000;
 int points_thread;
+int num_threads;
 pthread_mutex_t lock;
 
 void* calculate (void *arg){
@@ -38,6 +39,13 @@ void* calculate (void *arg){
 }
 
 int main(int argc, char *argv[]){
+	if (argc < 2){
+		num_threads = 1;
+	}	
+	else{
+		num_threads = atoi(argv[1]);
+	}
+	
 	clock_t start, end;
 	double time;
 	
