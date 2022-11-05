@@ -12,6 +12,11 @@ https://github.com/VictorRodriguez/parallel-programming-lecture/blob/main/labs/0
 #include <stdlib.h>
 #include <time.h>
 #include <omp.h>
+#define n 100
+
+int a[n][n];
+int b[n][n];
+int c[n][n];
 
 int main(int argc, char** argv){
 
@@ -24,17 +29,6 @@ int main(int argc, char** argv){
   }
   omp_set_num_threads(threads_num);
   printf("Number of threads: %d\n\n", threads_num);
-  
-  if (argc < 3){
-    n = 2;
-  }
-  else{
-    n = atoi(argv[2]);
-  }
-  
-  int a[n][n];
-  int b[n][n];
-  int c[n][n];
 
   int i, j, k;
   srand(time(NULL));
