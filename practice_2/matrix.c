@@ -20,7 +20,7 @@ int c[n][n];
 
 int main(int argc, char** argv){
 
-  int threads_num, solution, n;
+  int threads_num, solution;
   if (argc < 2){
     threads_num = 1;
   }
