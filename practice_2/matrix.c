@@ -19,7 +19,7 @@ int c[n][n];
 
 int main(int argc, char** argv){
 
-  int threads_num;
+  int threads_num, solution;
   if (argc < 2){
     threads_num = 1;
   }
@@ -31,8 +31,8 @@ int main(int argc, char** argv){
 
   int i, j, k;
   srand(time(NULL));
-  for(i = 0; i < n; i++){
-    for(j = 0; j < n; j++){
+  for (i = 0; i < n; i++){
+    for (j = 0; j < n; j++){
       a[i][j] = 1 + rand() % 101;
       b[i][j] = 1 + rand() % 101;
       c[i][j] = 0;
@@ -40,21 +40,29 @@ int main(int argc, char** argv){
   }
 
 #pragma omp parallel for private(i, j, k) shared (a, b, c)
-  for(i = 0; i < n;++i){
-    for(j = 0; j < n; ++j){
-      for(k = 0; k < n; ++k){
+  for (i = 0; i < n;++i){
+    for (j = 0; j < n; ++j){
+      for (k = 0; k < n; ++k){
         c[i][j] += (a[i][k] * b[k][j]);
       }
     }
   }
-  /*
-  printf("Solution matrix:\n");
-  for(i = 0; i < n; i++){
-    for(j = 0; j < n; j++){
-      printf("%d ", c[i][j]);
-    }
-    printf("\n");
+  
+  if (argc < 3){
+    solution = 0;
   }
-  */
+  else{
+    solution = atoi(argv[2]);
+  }
+  
+  if (solution == 1){
+    printf("Solution matrix:\n");
+    for(i = 0; i < n; i++){
+      for(j = 0; j < n; j++){
+        printf("%d ", c[i][j]);
+      }
+      printf("\n");
+    }
+  }
   return 0;
 }
