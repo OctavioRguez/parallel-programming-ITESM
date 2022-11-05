@@ -27,7 +27,7 @@ int main(int argc, char** argv){
     threads_num = atoi(argv[1]);
   }
   omp_set_num_threads(threads_num);
-  printf("Number of threads: &d\n", threads_num);
+  printf("Number of threads: &i\n", threads_num);
 
   int i, j, k;
   srand(time(NULL));
