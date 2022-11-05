@@ -1,3 +1,11 @@
+/*
+Autor:
+Misael Octavio Rodríguez Macías A01639786
+
+Con apoyo de los siguientes repositorios:
+
+*/
+
 #include <pthread.h>
 #include <stdio.h>
 #include <stdlib.h>
