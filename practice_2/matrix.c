@@ -18,7 +18,7 @@ int b[n][n];
 int c[n][n];
 
 int main(int argc, char** argv){
- 
+
   int threads_num;
   if (argc < 2){
     threads_num = 1;
