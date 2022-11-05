@@ -11,7 +11,7 @@ Con apoyo de los siguientes repositorios:
 #include <stdlib.h>
 #include <time.h>
 #include <omp.h>
-#define n 5
+#define n 100
 
 int a[n][n];
 int b[n][n];
