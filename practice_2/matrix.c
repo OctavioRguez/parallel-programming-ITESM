@@ -18,7 +18,7 @@ int b[n][n];
 int c[n][n];
 
 int main(int argc, char** argv){
-  
+ 
   int threads_num;
   if (argc < 2){
     threads_num = 1;
@@ -47,7 +47,7 @@ int main(int argc, char** argv){
       }
     }
   }
- 
+
   printf("Solution matrix:");
   for(i = 0; i < n; i++){
     for(j = 0; j < n; j++){
@@ -55,6 +55,6 @@ int main(int argc, char** argv){
     }
     printf("\n");
   }
-  
+ 
   return 0;
 }
