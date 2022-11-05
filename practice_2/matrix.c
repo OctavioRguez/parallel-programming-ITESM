@@ -27,7 +27,7 @@ int main(int argc, char** argv){
     threads_num = atoi(argv[1]);
   }
   omp_set_num_threads(threads_num);
-  printf("Number of threads: %d\n", threads_num);
+  printf("Number of threads: %d\n\n", threads_num);
 
   int i, j, k;
   srand(time(NULL));
@@ -48,7 +48,7 @@ int main(int argc, char** argv){
     }
   }
 
-  printf("Solution matrix:");
+  printf("Solution matrix:\n");
   for(i = 0; i < n; i++){
     for(j = 0; j < n; j++){
       printf("%d ", c[i][j]);
