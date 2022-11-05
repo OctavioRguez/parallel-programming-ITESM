@@ -47,14 +47,14 @@ int main(int argc, char** argv){
       }
     }
   }
-  
+
   if (argc < 3){
     solution = 0;
   }
   else{
     solution = atoi(argv[2]);
   }
-  
+
   if (solution == 1){
     printf("Solution matrix:\n");
     for(i = 0; i < n; i++){
