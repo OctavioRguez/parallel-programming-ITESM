@@ -47,7 +47,7 @@ int main(int argc, char** argv){
       }
     }
   }
-
+  /*
   printf("Solution matrix:\n");
   for(i = 0; i < n; i++){
     for(j = 0; j < n; j++){
@@ -55,6 +55,6 @@ int main(int argc, char** argv){
     }
     printf("\n");
   }
-
+  */
   return 0;
 }
