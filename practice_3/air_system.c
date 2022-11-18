@@ -3,11 +3,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <omp.h>
+
+#define row_num 6
+#define col_num 7
 
 pthread_mutex_t lock;
 bool kill = false; //Kill all the threads when true
-int TemperatureMatrix[6][7];
-char HeatMatrix[6][7]={
+int TemperatureMatrix[row_num][col_num];
+char HeatMatrix[row_num][col_num]={
 {'C','C','C','C','C','C','C'},
 {'C','C','C','C','C','C','C'},
 {'C','C','H','H','H','C','C'},
@@ -18,8 +22,8 @@ char HeatMatrix[6][7]={
 
 //Check if the threads have already completed the Temperature Matrix
 void checkMatrix(){
-  for(int a = 0; a < 6; a++){
-    for(int b = 0; b < 7; b++){
+  for(int a = 0; a < row_num; a++){
+    for(int b = 0; b < col_num; b++){
       if (TemperatureMatrix[a][b] == -1){
         return;
       }
@@ -40,7 +44,7 @@ void moveThread(int* i, int* j){
     limit1x = 0;
     limit2x = 0;
   }
-  else if(*i == 5){
+  else if(*i == row_num - 1){
     //Generate a random number (0 or -1)
     limit2x = 0;
   }
@@ -50,7 +54,7 @@ void moveThread(int* i, int* j){
     limit1y = 0;
     limit2y = 0;
   }
-  else if(*j == 6){
+  else if(*j == col_num - 1){
     //Generate a random number (0 or -1)
     limit2y = 0;
   }
@@ -63,8 +67,8 @@ void moveThread(int* i, int* j){
 
 //Set temperature
 void* temperature(void* id){
-  int i = rand() % 6;
-  int j = rand() % 7;
+  int i = rand() % row_num;
+  int j = rand() % col_num;
 
   //Keep moving until the Temperature Matrix is completed
   while(true){
@@ -94,8 +98,8 @@ int main(int argc, char *argv[]){
 
   //Print Char Matrix
   printf("Heat Matrix:\n");
-  for(int row = 0; row < 6; row++){
-    for(int col = 0; col < 7; col++){
+  for(int row = 0; row < row_num; row++){
+    for(int col = 0; col < col_num; col++){
       printf("%c ", HeatMatrix[row][col]);
       TemperatureMatrix[row][col] = -1;
     }
@@ -122,17 +126,41 @@ int main(int argc, char *argv[]){
   
   //Print Temperature Matrix
   printf("\nTemperature Matrix:\n");
-  for(int row = 0; row < 6; row++){
-    for(int col = 0; col < 7; col++){
+  for(int row = 0; row < row_num; row++){
+    for(int col = 0; col < col_num; col++){
       printf("%d ", TemperatureMatrix[row][col]);
     }
     printf("\n");
   }
 
   //Heat Equation
-  #pragma omp parallel
+  int max_iter_time = 80;
+  int alpha = 2;
+  int delta_x = 1;
+  
+  int delta_t = (delta_x*delta_x)/(4 * alpha);
+  int gamma = (alpha * delta_t) / (delta_x*delta_x);
+  int u[max_iter_time][row_num][col_num];
 
+  omp_set_num_threads(num_threads);
+#pragma omp parallel for private(k, i, j) shared (u, TemperatureMatrix)
+  for(int k = 0; k < max_iter_time; k++){
+    for(int i = 0; i < row_num; i++){
+      for(int j = 0; j < col_num; j++){
+        u[k][i][j] = TemperatureMatrix[i][j];
+      }
+    }
+  }
 
+#pragma omp parallel for private(k, i, j) shared (u)
+  for(int k = 0; k < max_iter_time - 1; k++){
+    for(int i = 1; i < row_num - 1; i+= delta_x){
+      for(int j = 1; j < col_num - 1; j+= delta_x){
+        u[k + 1][i][j] = gamma * (u[k][i+1][j] + u[k][i-1][j] + u[k][i][j+1] + u[k][i][j-1] - 4*u[k][i][j]) + u[k][i][j];
+      }
+    }
+  }
+  
   printf("\nDear manager:");
   printf("\nThis is the heat equation for the factory:");
   //HeatEquation
