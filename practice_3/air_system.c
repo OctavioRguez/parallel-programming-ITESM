@@ -20,7 +20,7 @@ https://levelup.gitconnected.com/solving-2d-heat-equation-numerically-using-pyth
 #define row_num 6
 #define col_num 7
 
-//pthread_mutex_t lock;
+pthread_mutex_t lock;
 bool kill = false; //Kill all the threads when true
 int TemperatureMatrix[row_num][col_num];
 char HeatMatrix[row_num][col_num]={
@@ -84,25 +84,25 @@ void* temperature(void* id){
 
   //Keep moving until the Temperature Matrix is completed
   while(true){
-    if (id == 0){ //Only the first thread check the Temperature Matrix
-      checkMatrix();
-    }
-
     if (kill){ //Stop
       pthread_exit(NULL);
     }
 
     moveThread(&i, &j); //Call the function to move the thread
 
+    pthread_mutex_lock(&lock);
+    if (id == 0){ //Only the first thread check the Temperature Matrix
+      checkMatrix();
+    }
+
     //Generate a random number in the Temperature Matrix
-    //pthread_mutex_lock(&lock);
     if (HeatMatrix[i][j] == 'C'){
       TemperatureMatrix[i][j] = rand() % 61;
     }
     else{
       TemperatureMatrix[i][j] = 61 + rand() % (101 - 61);
     }
-    //pthread_mutex_unlock(&lock);
+    pthread_mutex_unlock(&lock);
   }
 }
 
@@ -195,6 +195,6 @@ int main(int argc, char *argv[]){
   end = clock();
   time_used = (double)(end - start)/CLOCKS_PER_SEC;
   printf("Time with %i threads = %f\n", num_threads, time_used);
-  //pthread_mutex_destroy(&lock);
+  pthread_mutex_destroy(&lock);
   return 0;
 }
