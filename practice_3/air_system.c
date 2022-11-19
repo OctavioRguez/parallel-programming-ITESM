@@ -184,7 +184,8 @@ int main(int argc, char *argv[]){
   printf("\ny = %d * (%.3f / (%d)^2)\n", alpha, delta_t, delta_x);
   printf("\nThis is the forecast of the heat at the factory for the incoming 10 hours:");
   printf("\nCode for generate the heat map (needs the values from the random temperature matrix): https://github.com/OctavioRguez/parallel-programming-ITESM/blob/main/practice_3/Heat_Map.ipynb");
-  printf("\n\n");
+  printf("\n");
+  printf("\n(The calculation of the forecast is part of this code, but the plot can not be made)");
 
   pthread_mutex_destroy(&lock);
   return 0;
