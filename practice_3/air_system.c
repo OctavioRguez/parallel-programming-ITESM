@@ -79,6 +79,7 @@ void moveThread(int* i, int* j){
 
 //Set temperature
 void* temperature(void* id){
+  printf("a");
   int i = rand() % row_num;
   int j = rand() % col_num;
 
