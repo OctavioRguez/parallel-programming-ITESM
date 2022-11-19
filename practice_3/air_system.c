@@ -85,7 +85,7 @@ void* temperature(void* id){
     if (id == 0){ //Only the first thread check the Temperature Matrix
       checkMatrix();
     }
-    
+
     if (kill){ //Stop
       pthread_exit(NULL);
     }
