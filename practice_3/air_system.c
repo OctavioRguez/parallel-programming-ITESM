@@ -135,6 +135,10 @@ int main(int argc, char *argv[]){
           exit(-1);
       }
   }
+  
+  for(int m = 0; m < num_threads; m++){
+		pthread_join(threads[m], NULL);
+	}
 
   //Print Temperature Matrix
   printf("\nTemperature Matrix:\n");
