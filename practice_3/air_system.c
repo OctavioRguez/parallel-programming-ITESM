@@ -103,9 +103,6 @@ void* temperature(void* id){
 }
 
 int main(int argc, char *argv[]){
-  clock_t start, end;
-  double time_used;
-  start = clock();
 
   //Print Char Matrix
   printf("Heat Matrix:\n");
@@ -187,8 +184,5 @@ int main(int argc, char *argv[]){
   printf("\n(The calculation of the forecast is part of this code, but the plot can not be made)");
   printf("\n\n");
 
-  end = clock();
-  time_used = (double)(end - start)/CLOCKS_PER_SEC;
-  printf("Time with %i threads = %f\n", num_threads, time_used);
   return 0;
 }
