@@ -70,7 +70,7 @@ void moveThread(int* i, int* j){
     //Generate a random number (0 or -1)
     limit2y = 0;
   }
-  
+
   int x = (limit1x) + rand() % (2 - (limit2x));
   int y = (limit1y) + rand() % (2 - (limit2y));
   *i += x;
@@ -87,7 +87,7 @@ void* temperature(void* id){
     if (id == 0){ //Only the first thread check the Temperature Matrix
       checkMatrix();
     }
-    
+
     if (kill){ //Stop
       pthread_exit(NULL);
     }
@@ -135,7 +135,7 @@ int main(int argc, char *argv[]){
           exit(-1);
       }
   }
-  
+
   //Print Temperature Matrix
   printf("\nTemperature Matrix:\n");
   for(int row = 0; row < row_num; row++){
@@ -150,12 +150,12 @@ int main(int argc, char *argv[]){
   int alpha = 2;
   int delta_x = 1;
   float delta_t = (pow(delta_x, 2))/(4 * alpha);
-  
+
   //Solve heat equation
   float gamma = (alpha * delta_t) / (pow(delta_x, 2));
   int u[max_iter_time][row_num][col_num];
   omp_set_num_threads(num_threads);
-  
+
   int k, i, j;
 #pragma omp parallel for private(k, i, j) shared (u, TemperatureMatrix)
   for(k = 0; k < max_iter_time; k++){
@@ -174,7 +174,7 @@ int main(int argc, char *argv[]){
       }
     }
   }
-  
+
   printf("\n\nDear manager:");
   printf("\nThis is the heat equation for the factory:");
   printf("\ny = %d * (%.3f / (%d)^2)\n", alpha, delta_t, delta_x);
