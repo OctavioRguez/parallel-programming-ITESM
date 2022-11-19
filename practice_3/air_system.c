@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include <math.h>
 #include <omp.h>
 
 #define row_num 6
@@ -133,15 +134,15 @@ int main(int argc, char *argv[]){
     printf("\n");
   }
 
-  //Heat Equation
+  //Heat Equation values
   int max_iter_time = 80;
   int alpha = 2;
   int delta_x = 1;
+  float delta_t = (pow(delta_x, 2))/(4 * alpha);
   
-  int delta_t = (delta_x*delta_x)/(4 * alpha);
-  int gamma = (alpha * delta_t) / (delta_x*delta_x);
+  //Solve heat equation
+  float gamma = (alpha * delta_t) / (delta_x*delta_x);
   int u[max_iter_time][row_num][col_num];
-
   omp_set_num_threads(num_threads);
 #pragma omp parallel for private(k, i, j) shared (u, TemperatureMatrix)
   for(int k = 0; k < max_iter_time; k++){
@@ -161,13 +162,12 @@ int main(int argc, char *argv[]){
     }
   }
   
-  printf("\nDear manager:");
+  printf("\n\nDear manager:");
   printf("\nThis is the heat equation for the factory:");
-  //HeatEquation
-  printf("\nThis is the forecast of the heat at the factory for the incoming 10 hours:");
-  //Plot
-  printf("\nWe must turn on fans in <X> amount of hours to avoid arriving to Max temperature (70 °C average) in the factory.\n");
+  printf("\ny = %d * (%.3f / (%d)^2)\n", alpha, delta_t, delta_x);
+  printf("\n\nThis is the forecast of the heat at the factory for the incoming 10 hours:");
+  printf("\nCode for generate the heat map (needs the values from the random temperature matrix): https://github.com/OctavioRguez/parallel-programming-ITESM/blob/main/practice_3/Heat_Map.ipynb");
+
   pthread_mutex_destroy(&lock);
-  
   return 0;
 }
