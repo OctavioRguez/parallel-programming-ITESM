@@ -153,7 +153,7 @@ int main(int argc, char *argv[]){
   int alpha = 2;
   int delta_x = 1;
   float delta_t = (pow(delta_x, 2))/(4 * alpha);
-/*
+
   //Solve heat equation
   float gamma = (alpha * delta_t) / (pow(delta_x, 2));
   int u[max_iter_time][row_num][col_num];
@@ -177,7 +177,7 @@ int main(int argc, char *argv[]){
       }
     }
   }
-*/
+
   printf("\nDear manager:");
   printf("\nThis is the heat equation for the factory:");
   printf("\ny = %d * (%.3f / (%d)^2)\n", alpha, delta_t, delta_x);
