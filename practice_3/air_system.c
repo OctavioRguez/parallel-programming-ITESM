@@ -192,7 +192,7 @@ int main(int argc, char *argv[]){
   printf("\n\n");
 
   end = clock();
-	time_used = (double)(end - start)/CLOCKS_PER_SEC;
+  time_used = (double)(end - start)/CLOCKS_PER_SEC;
   printf("Time with %i threads = %f\n", num_threads, time_used);
   pthread_mutex_destroy(&lock);
   return 0;
