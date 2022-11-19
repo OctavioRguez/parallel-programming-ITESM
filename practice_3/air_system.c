@@ -84,18 +84,18 @@ void* temperature(void* id){
 
   //Keep moving until the Temperature Matrix is completed
   while(true){
+    if (id == 0){ //Only the first thread check the Temperature Matrix
+      checkMatrix();
+    }
+    
     if (kill){ //Stop
       pthread_exit(NULL);
     }
 
     moveThread(&i, &j); //Call the function to move the thread
 
-    pthread_mutex_lock(&lock);
-    if (id == 0){ //Only the first thread check the Temperature Matrix
-      checkMatrix();
-    }
-
     //Generate a random number in the Temperature Matrix
+    pthread_mutex_lock(&lock);
     if (HeatMatrix[i][j] == 'C'){
       TemperatureMatrix[i][j] = rand() % 61;
     }
