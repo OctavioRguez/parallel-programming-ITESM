@@ -36,7 +36,7 @@ char HeatMatrix[row_num][col_num]={
 void checkMatrix(){
   for(int a = 0; a < row_num; a++){
     for(int b = 0; b < col_num; b++){
-      if (TemperatureMatrix[a][b] == -1){
+      if (TemperatureMatrix[a][b] == 0){
         return;
       }
     }
@@ -113,7 +113,7 @@ int main(int argc, char *argv[]){
   for(int row = 0; row < row_num; row++){
     for(int col = 0; col < col_num; col++){
       printf("%c ", HeatMatrix[row][col]);
-      TemperatureMatrix[row][col] = -1;
+      TemperatureMatrix[row][col] = 0;
     }
     printf("\n");
   }
