@@ -190,7 +190,7 @@ int main(int argc, char *argv[]){
   printf("\n");
   printf("\n(The calculation of the forecast is part of this code, but the plot can not be made)");
   printf("\n\n");
-  
+ 
   end = clock();
 	time_used = (double)(end - start)/CLOCKS_PER_SEC;
   printf("Time with %i threads = %f\n", num_threads, time_used);
