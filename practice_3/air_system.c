@@ -108,8 +108,8 @@ void* temperature(void* id){
 
 int main(int argc, char *argv[]){
   clock_t start, end;
-	double time_used;
-	start = clock();
+  double time_used;
+  start = clock();
 
   //Print Char Matrix
   printf("Heat Matrix:\n");
