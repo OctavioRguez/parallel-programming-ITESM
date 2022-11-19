@@ -1,3 +1,14 @@
+/*
+Autor:
+Misael Octavio Rodríguez Macías A01639786
+
+Con apoyo de los siguientes repositorios:
+https://github.com/VictorRodriguez/parallel-programming-lecture/blob/main/labs/04/simple-thread.c
+https://github.com/VictorRodriguez/parallel-programming-lecture/blob/main/labs/04/mutex-thread.c
+https://github.com/VictorRodriguez/parallel-programming-lecture/blob/main/labs/07/omp_for.c
+https://levelup.gitconnected.com/solving-2d-heat-equation-numerically-using-python-3334004aa01a
+*/
+
 #include <stdbool.h>
 #include <pthread.h>
 #include <stdio.h>
