@@ -152,9 +152,10 @@ int main(int argc, char *argv[]){
   float delta_t = (pow(delta_x, 2))/(4 * alpha);
   
   //Solve heat equation
-  float gamma = (alpha * delta_t) / (delta_x*delta_x);
+  float gamma = (alpha * delta_t) / (pow(delta_x, 2));
   int u[max_iter_time][row_num][col_num];
   omp_set_num_threads(num_threads);
+  
 #pragma omp parallel for private(k, i, j) shared (u, TemperatureMatrix)
   for(int k = 0; k < max_iter_time; k++){
     for(int i = 0; i < row_num; i++){
