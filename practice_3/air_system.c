@@ -4,7 +4,6 @@ Misael Octavio Rodríguez Macías A01639786
 
 Con apoyo de los siguientes repositorios:
 https://github.com/VictorRodriguez/parallel-programming-lecture/blob/main/labs/04/simple-thread.c
-https://github.com/VictorRodriguez/parallel-programming-lecture/blob/main/labs/04/mutex-thread.c
 https://github.com/VictorRodriguez/parallel-programming-lecture/blob/main/labs/07/omp_for.c
 https://levelup.gitconnected.com/solving-2d-heat-equation-numerically-using-python-3334004aa01a
 */
@@ -20,7 +19,6 @@ https://levelup.gitconnected.com/solving-2d-heat-equation-numerically-using-pyth
 #define row_num 6
 #define col_num 7
 
-pthread_mutex_t lock;
 bool kill = false; //Kill all the threads when true
 int TemperatureMatrix[row_num][col_num];
 char HeatMatrix[row_num][col_num]={
@@ -95,14 +93,12 @@ void* temperature(void* id){
     moveThread(&i, &j); //Call the function to move the thread
 
     //Generate a random number in the Temperature Matrix
-    pthread_mutex_lock(&lock);
     if (HeatMatrix[i][j] == 'C'){
       TemperatureMatrix[i][j] = rand() % 61;
     }
     else{
       TemperatureMatrix[i][j] = 61 + rand() % (101 - 61);
     }
-    pthread_mutex_unlock(&lock);
   }
 }
 
@@ -110,11 +106,6 @@ int main(int argc, char *argv[]){
   clock_t start, end;
   double time_used;
   start = clock();
-  
-  if (pthread_mutex_init(&lock, NULL) != 0){
-      printf("\n mutex init failed\n");
-      return 1;
-  }
 
   //Print Char Matrix
   printf("Heat Matrix:\n");
@@ -143,11 +134,10 @@ int main(int argc, char *argv[]){
           exit(-1);
       }
   }
-  /*
+
   for(int m = 0; m < num_threads; m++){
       pthread_join(threads[m], NULL);
   }
-  */
 
   //Print Temperature Matrix
   printf("\nTemperature Matrix:\n");
@@ -200,6 +190,5 @@ int main(int argc, char *argv[]){
   end = clock();
   time_used = (double)(end - start)/CLOCKS_PER_SEC;
   printf("Time with %i threads = %f\n", num_threads, time_used);
-  pthread_mutex_destroy(&lock);
   return 0;
 }
